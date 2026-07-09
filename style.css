@@ -1,0 +1,1546 @@
+/* ==========================================================================
+   DESIGN SYSTEM, THEMES, & CUSTOM FONTS
+   ========================================================================== */
+:root {
+  /* Font Family Definitions */
+  --font-title: 'Fredoka', sans-serif;
+  --font-body: 'Quicksand', sans-serif;
+
+  /* Theme Defaults (Theme Light / Cream) */
+  --bg-color: #faf6f0; /* Cream background */
+  --bg-gradient: linear-gradient(135deg, #faf6f0 0%, #fcebeb 100%);
+  --text-color: #5c3c3c;
+  --text-muted: #8c6a6a;
+  
+  --card-bg: rgba(255, 255, 255, 0.45);
+  --card-border: rgba(255, 255, 255, 0.7);
+  --card-shadow: 0 12px 32px rgba(244, 63, 94, 0.06);
+  
+  --primary-color: #ff758f;
+  --primary-glow: rgba(255, 117, 143, 0.3);
+  --accent-color: #ffb3c1;
+  --accent-hover: #ff85a1;
+  
+  --mascot-shadow-color: rgba(255, 117, 143, 0.25);
+  --meter-gradient: linear-gradient(90deg, #ff758f 0%, #ffb3c1 100%);
+  --btn-shadow: 0 8px 20px rgba(255, 117, 143, 0.2);
+
+  --transition-speed: 0.4s;
+  --transition-bezier: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- Theme Pink (Sweet Rose) --- */
+body.theme-pink {
+  --bg-color: #fff0f3;
+  --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffe3e8 100%);
+  --text-color: #4a1521;
+  --text-muted: #803d4c;
+  
+  --card-bg: rgba(255, 255, 255, 0.55);
+  --card-border: rgba(255, 255, 255, 0.8);
+  --card-shadow: 0 12px 32px rgba(255, 75, 110, 0.1);
+  
+  --primary-color: #ff4d6d;
+  --primary-glow: rgba(255, 77, 109, 0.45);
+  --accent-color: #ff758f;
+  --accent-hover: #ff85a1;
+  
+  --mascot-shadow-color: rgba(255, 77, 109, 0.35);
+  --meter-gradient: linear-gradient(90deg, #ff4d6d 0%, #ff85a1 100%);
+  --btn-shadow: 0 8px 20px rgba(255, 77, 109, 0.35);
+}
+
+/* --- Theme Night (Midnight Loveland) --- */
+body.theme-night {
+  --bg-color: #0f0c1b;
+  --bg-gradient: linear-gradient(135deg, #0f0c1b 0%, #201335 100%);
+  --text-color: #ffccd5;
+  --text-muted: #c9ada7;
+  
+  --card-bg: rgba(24, 18, 43, 0.45);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  
+  --primary-color: #f72585;
+  --primary-glow: rgba(247, 37, 133, 0.6);
+  --accent-color: #b5179e;
+  --accent-hover: #7209b7;
+  
+  --mascot-shadow-color: rgba(247, 37, 133, 0.4);
+  --meter-gradient: linear-gradient(90deg, #f72585 0%, #7209b7 100%);
+  --btn-shadow: 0 8px 20px rgba(247, 37, 133, 0.5);
+}
+
+/* --- Theme Dream (Pastel Cosmos) --- */
+body.theme-dream {
+  --bg-color: #e8ecf9;
+  --bg-gradient: linear-gradient(135deg, #e8ecf9 0%, #f3e8ee 100%);
+  --text-color: #2b3a67;
+  --text-muted: #5c6784;
+  
+  --card-bg: rgba(255, 255, 255, 0.5);
+  --card-border: rgba(255, 255, 255, 0.75);
+  --card-shadow: 0 12px 32px rgba(162, 179, 233, 0.15);
+  
+  --primary-color: #9b5de5;
+  --primary-glow: rgba(155, 93, 229, 0.35);
+  --accent-color: #f15bb5;
+  --accent-hover: #fee440;
+  
+  --mascot-shadow-color: rgba(155, 93, 229, 0.25);
+  --meter-gradient: linear-gradient(90deg, #9b5de5 0%, #fee440 100%);
+  --btn-shadow: 0 8px 20px rgba(155, 93, 229, 0.25);
+}
+
+/* ==========================================================================
+   GLOBAL RESET & DECORATIVE BACKGROUNDS
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-color);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background var(--transition-speed) var(--transition-bezier),
+              color var(--transition-speed) var(--transition-bezier);
+}
+
+/* Particle system background layer */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY UTILITIES
+   ========================================================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Accessibility keyboard focus outlines */
+button:focus-visible,
+[role="button"]:focus-visible,
+.memory-slider:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   LOADING ANIMATION OVERLAY
+   ========================================================================== */
+.loader-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  background-image: var(--bg-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.loader-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-content {
+  text-align: center;
+  max-width: 90%;
+  width: 320px;
+}
+
+/* Bouncing elements */
+.loader-heart-wrapper {
+  position: relative;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.loader-heart-main {
+  font-size: 4rem;
+  animation: heart-bounce 1.2s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.loader-heart-mini {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0;
+  animation: heart-float-up 2s infinite ease-out;
+}
+
+.loader-heart-mini:nth-child(2) {
+  left: 30%;
+  animation-delay: 0.3s;
+}
+
+.loader-heart-mini:nth-child(3) {
+  right: 30%;
+  animation-delay: 0.6s;
+}
+
+.loader-heart-mini:nth-child(4) {
+  left: 50%;
+  animation-delay: 0.9s;
+}
+
+.loader-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.5rem, 6vw, 2.2rem);
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+/* Progress bar container */
+.loader-bar-outer {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.loader-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: var(--meter-gradient);
+  border-radius: 20px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px var(--primary-glow);
+}
+
+.loader-message {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   APP CONTAINER & LAYOUT STRUCTURE
+   ========================================================================== */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 85px 16px 80px 16px; /* Space for sticky header & bottom padding */
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.app-container.hidden {
+  opacity: 0;
+  display: none;
+}
+
+/* ==========================================================================
+   STICKY GLASSMOPHIC TOP BAR
+   ========================================================================== */
+.sticky-header {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 24px);
+  max-width: 600px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 12px 16px;
+  z-index: 100;
+  box-shadow: var(--card-shadow);
+  transition: background var(--transition-speed), border var(--transition-speed);
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Love Meter inside Sticky Card */
+.love-meter-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.love-meter-label {
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.emoji-pulse {
+  display: inline-block;
+  animation: pulse-quick 1s infinite alternate;
+}
+
+.love-meter-bar-container {
+  width: 100%;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.love-meter-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--meter-gradient);
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 0 10px var(--primary-glow);
+  transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+}
+
+/* Glowing shimmer effect on fill bar */
+.love-meter-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-effect 2.5s infinite linear;
+}
+
+.love-meter-bar-fill.glow-pulse {
+  animation: bar-glow-pulse 0.5s ease-out 1;
+}
+
+/* Status Badges: Clock & Weather */
+.status-badges {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.badge-icon {
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   MAIN CONTENT & HERO TITLE SECTION
+   ========================================================================== */
+.main-content {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.hero-section {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.hero-title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 9vw, 3.2rem);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+/* Indepedently animated title letters */
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+  animation: letter-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Sequential delay for letters */
+.letter:nth-child(1) { animation-delay: 0.1s; }
+.letter:nth-child(2) { animation-delay: 0.2s; }
+.letter:nth-child(3) { animation-delay: 0.3s; }
+.letter:nth-child(4) { animation-delay: 0.4s; }
+.letter:nth-child(5) { animation-delay: 0.5s; }
+.letter:nth-child(6) { width: 12px; } /* Space character */
+.letter:nth-child(7) { animation-delay: 0.6s; }
+.letter:nth-child(8) { animation-delay: 0.7s; }
+.letter:nth-child(9) { animation-delay: 0.8s; }
+.letter:nth-child(10) { animation-delay: 0.9s; }
+
+.heart-letter {
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.hero-subtitle {
+  font-size: clamp(0.95rem, 4vw, 1.2rem);
+  font-weight: 600;
+  color: var(--text-muted);
+  min-height: 1.8em; /* Prevent layout shifting during typing */
+}
+
+/* ==========================================================================
+   MASCOT CHARACTER SECTION
+   ========================================================================== */
+.mascot-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.mascot-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* Speech Bubble overlay */
+.speech-bubble {
+  position: absolute;
+  top: -65px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 10px 18px;
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+  color: var(--text-color);
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  z-index: 10;
+  white-space: nowrap;
+  animation: speech-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.speech-bubble.hidden {
+  display: none;
+}
+
+.speech-arrow {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: var(--card-bg);
+  border-right: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+}
+
+/* Character Portrait Frame */
+.mascot-container {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  width: clamp(160px, 45vw, 240px);
+  height: clamp(160px, 45vw, 240px);
+  border-radius: 50%;
+  animation: mascot-float 5s ease-in-out infinite,
+             mascot-breathe 4s ease-in-out infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.mascot-img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px var(--mascot-shadow-color);
+  transition: transform 0.3s var(--transition-bezier), box-shadow 0.3s;
+}
+
+/* Mascot blush overlay: pink blurred glow overlays */
+.mascot-blush {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  background: #ff4d6d;
+  filter: blur(6px);
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.5s ease-out;
+}
+
+.mascot-blush.left {
+  top: 55%;
+  left: 28%;
+}
+
+.mascot-blush.right {
+  top: 55%;
+  right: 28%;
+}
+
+.mascot-blush.blushing {
+  opacity: 0.65;
+}
+
+/* Eyelid overlay for cartoon blinking (simulated squeeze) */
+.eyelid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: transparent;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Blink cartoon squeeze effect applied via JS */
+.mascot-container.blinking {
+  animation: mascot-blink-squeeze 0.15s ease-in-out 1;
+}
+
+/* Mascot Shadow underneath */
+.mascot-shadow {
+  position: absolute;
+  bottom: -15px;
+  width: 60%;
+  height: 8px;
+  background: var(--mascot-shadow-color);
+  filter: blur(5px);
+  border-radius: 50%;
+  animation: shadow-scale 5s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Mascot Interaction states */
+.mascot-container.click-bounce {
+  animation: mascot-bounce-click 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.5) 1;
+}
+
+/* Quick Actions: Hug & Kiss buttons */
+.quick-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.btn-action {
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+  padding: 10px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s var(--transition-bezier),
+              background 0.3s, box-shadow 0.3s;
+}
+
+.btn-action:hover {
+  transform: translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 24px rgba(255, 117, 143, 0.12);
+}
+
+.btn-action:active {
+  transform: translateY(-1px) scale(0.97);
+}
+
+.btn-icon {
+  font-size: 1.15rem;
+}
+
+/* ==========================================================================
+   LOVE BUTTON SECTION (GIANT ANIMATED HEART)
+   ========================================================================== */
+.love-trigger-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.love-heart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  width: clamp(80px, 20vw, 110px);
+  height: clamp(80px, 20vw, 110px);
+  outline: none;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.svg-heart {
+  width: 100%;
+  height: 100%;
+  fill: var(--primary-color);
+  filter: drop-shadow(0 6px 12px var(--btn-shadow));
+  transition: fill 0.3s, filter 0.3s;
+  animation: heart-pulsing 1.8s infinite ease-in-out;
+}
+
+.love-heart-btn:hover {
+  transform: scale(1.1);
+}
+
+.love-heart-btn:hover .svg-heart {
+  fill: #ff4d6d;
+  filter: drop-shadow(0 10px 20px var(--primary-glow));
+}
+
+.love-heart-btn:active {
+  transform: scale(0.9);
+}
+
+.heart-pulse-glow {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  background: var(--primary-color);
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.4;
+  z-index: -1;
+  animation: heart-glow-pulse 1.8s infinite ease-in-out;
+}
+
+.tap-hint {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  animation: float-small 3s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   MEMORY CARDS SECTION
+   ========================================================================== */
+.memory-section {
+  width: 100%;
+  padding: 0 8px;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.2rem, 5vw, 1.6rem);
+  text-align: center;
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+/* Scrollable cards slider styling */
+.memory-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 10px 8px 24px 8px;
+  scrollbar-width: none; /* Hide standard Firefox scrollbar */
+  -ms-overflow-style: none; /* Hide IE scrollbar */
+}
+
+/* Hide scrollbar for Webkit browsers */
+.memory-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.memory-card {
+  flex: 0 0 180px; /* Card size */
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 18px 14px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s var(--transition-bezier),
+              box-shadow 0.3s, background 0.3s;
+  cursor: pointer;
+}
+
+.memory-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 16px 36px rgba(255, 117, 143, 0.12);
+}
+
+.memory-emoji {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  display: inline-block;
+  animation: float-small-rotate 4s ease-in-out infinite alternate;
+}
+
+.memory-card-title {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.memory-text {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   COMPLIMENT & QUOTES SECTION
+   ========================================================================== */
+.compliment-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-compliment {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: var(--meter-gradient);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 28px;
+  cursor: pointer;
+  box-shadow: var(--btn-shadow);
+  transition: transform 0.2s var(--transition-bezier), box-shadow 0.3s;
+}
+
+.btn-compliment:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px var(--primary-glow);
+}
+
+.btn-compliment:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.quotes-section {
+  width: 100%;
+}
+
+.quote-card-wrapper {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 16px 20px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--text-muted);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.quote-text.fade-out {
+  opacity: 0;
+}
+
+/* ==========================================================================
+   FLOATING INTERACTIVE WIDGETS
+   ========================================================================== */
+.btn-floating {
+  position: fixed;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--card-shadow);
+  z-index: 90;
+  font-size: 1.3rem;
+  transition: transform 0.3s var(--transition-bezier), background 0.3s;
+}
+
+.btn-floating:hover {
+  transform: scale(1.1) translateY(-3px);
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-floating:active {
+  transform: scale(0.95);
+}
+
+/* Bottom Left Music Button */
+.music-widget {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 95;
+}
+
+.svg-music-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-color);
+  transition: fill 0.3s;
+}
+
+.svg-music-icon.playing {
+  fill: var(--primary-color);
+  animation: float-small-rotate 2s infinite ease-in-out alternate;
+}
+
+/* Theme Switching Panel Widget (Floating Top Right) */
+.theme-widget {
+  position: fixed;
+  top: 90px; /* Sit below sticky header */
+  right: 20px;
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.theme-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 8px;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transform-origin: top right;
+  transition: opacity 0.3s var(--transition-bezier),
+              transform 0.3s var(--transition-bezier);
+}
+
+.theme-panel.hidden {
+  opacity: 0;
+  transform: scale(0.8) translateY(-10px);
+  pointer-events: none;
+}
+
+.theme-opt {
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--text-color);
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.theme-opt:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+}
+
+/* Floating Gift Box Widget (Bottom Right) */
+.gift-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 95;
+}
+
+.gift-box-btn {
+  background: none;
+  border: none;
+  position: relative;
+  width: 55px;
+  height: 55px;
+  cursor: pointer;
+  outline: none;
+  animation: gift-shake 2.5s infinite ease-in-out;
+}
+
+.gift-lid {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 45px;
+  height: 12px;
+  background: #ff4d6d;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.4);
+  z-index: 3;
+}
+
+.gift-box-body {
+  position: absolute;
+  top: 15px;
+  left: 7px;
+  width: 41px;
+  height: 35px;
+  background: #ff758f;
+  border-radius: 0 0 6px 6px;
+  box-shadow: inset -3px 0 0 rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+/* Custom ribbons on gift box */
+.gift-lid::before,
+.gift-box-body::before {
+  content: '';
+  position: absolute;
+  background: #fee440;
+}
+
+.gift-lid::before {
+  top: 0;
+  left: 19px;
+  width: 7px;
+  height: 100%;
+}
+
+.gift-box-body::before {
+  top: 0;
+  left: 17px;
+  width: 7px;
+  height: 100%;
+}
+
+/* Cute ribbon bow */
+.gift-box-btn::before,
+.gift-box-btn::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  width: 14px;
+  height: 12px;
+  border: 3px solid #fee440;
+  border-radius: 50% 50% 0 50%;
+  z-index: 4;
+}
+
+.gift-box-btn::before {
+  left: 14px;
+  transform: rotate(-35deg);
+}
+
+.gift-box-btn::after {
+  right: 14px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(35deg);
+}
+
+.gift-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+  filter: blur(10px);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* ==========================================================================
+   GLASSMORPHISM POPUP / MODAL SYSTEM
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(92, 60, 60, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-card {
+  width: 90%;
+  max-width: 420px;
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 32px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(92, 60, 60, 0.15);
+  position: relative;
+  transform: scale(1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.hidden .modal-card {
+  transform: scale(0.85);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0,0,0,0.05);
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: rgba(0,0,0,0.1);
+  transform: rotate(90deg);
+}
+
+/* Modal Content formatting */
+.modal-body {
+  font-family: var(--font-body);
+  color: var(--text-color);
+  text-align: center;
+  padding-top: 10px;
+}
+
+/* Envelope opening container for love letter popups */
+.envelope-container {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  margin-bottom: 20px;
+  perspective: 600px;
+}
+
+.envelope-back {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 120px;
+  background: #fecfef;
+  border-radius: 0 0 12px 12px;
+  z-index: 1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.envelope-paper {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 110px;
+  background: #ffffff;
+  border-radius: 6px;
+  z-index: 2;
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.envelope-container.open .envelope-paper {
+  transform: translateX(-50%) translateY(-65px);
+}
+
+.envelope-front {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 120px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Triangle folding flaps */
+.envelope-front::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-left: 100px solid #ffb3c1;
+  border-right: 100px solid #ffb3c1;
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid #ffb3c1;
+  border-radius: 0 0 12px 12px;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%) rotateX(0deg);
+  transform-origin: top center;
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-top: 60px solid #ff9a9e;
+  z-index: 4;
+  transition: transform 0.6s ease;
+}
+
+.envelope-container.open .envelope-flap {
+  transform: translateX(-50%) rotateX(180deg);
+  z-index: 0;
+}
+
+.letter-title {
+  font-family: var(--font-title);
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.letter-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  white-space: pre-line;
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 0 8px;
+}
+
+/* Custom compliment modal popup design */
+.compliment-popup-body {
+  padding: 16px 8px;
+}
+
+.compliment-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  animation: float-small-rotate 3s infinite ease-in-out alternate;
+}
+
+.compliment-quote {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   FINALE ORCHESTRATION OVERLAY (100% SUCCESS)
+   ========================================================================== */
+.finale-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #ffe5ec 0%, #ffc2d1 50%, #fb6f92 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.finale-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+/* Alternate Night celebration layout */
+body.theme-night .finale-overlay {
+  background: radial-gradient(circle at center, #241442 0%, #15092a 60%, #080312 100%);
+}
+
+.finale-content {
+  text-align: center;
+  max-width: 90%;
+  width: 480px;
+  padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 36px;
+  box-shadow: 0 30px 70px rgba(251, 111, 146, 0.35);
+  animation: modal-pop-reveal 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+}
+
+.finale-character-frame {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 6px solid #ffffff;
+  box-shadow: 0 10px 30px rgba(251, 111, 146, 0.4);
+  overflow: hidden;
+  margin: 0 auto 24px auto;
+  animation: mascot-celebrate-jump 1.6s infinite ease-in-out;
+}
+
+.finale-mascot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.finale-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  color: #fb6f92;
+  text-shadow: 0 4px 10px rgba(251, 111, 146, 0.2);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+body.theme-night .finale-title {
+  color: #ff3377;
+}
+
+.finale-subtitle {
+  font-size: clamp(0.95rem, 4.5vw, 1.15rem);
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-bottom: 30px;
+}
+
+.replay-btn {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 28px;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(255, 77, 109, 0.4);
+  transition: transform 0.2s var(--transition-bezier), box-shadow 0.3s;
+}
+
+.replay-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(255, 77, 109, 0.55);
+}
+
+.replay-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* ==========================================================================
+   CSS TOUCH SCREEN / PAGE SQUEEZE VIGNETTE EFFECTS
+   ========================================================================== */
+.page-squeeze-active {
+  animation: page-squeeze-inward 0.5s ease-out 1;
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================== */
+/* Bouncing main heart for loading */
+@keyframes heart-bounce {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.15) translateY(-15px); }
+}
+
+/* Mini hearts floating up */
+@keyframes heart-float-up {
+  0% { transform: translateY(30px) scale(0.5); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
+}
+
+/* Background gradient blobs drifting */
+@keyframes shimmer-effect {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Love level fill increase pop glow */
+@keyframes bar-glow-pulse {
+  0% { box-shadow: 0 0 10px var(--primary-glow); }
+  50% { box-shadow: 0 0 25px rgba(255, 77, 109, 0.8), inset 0 0 10px rgba(255,255,255,0.8); }
+  100% { box-shadow: 0 0 10px var(--primary-glow); }
+}
+
+/* Hero reveal bounce animation */
+@keyframes letter-reveal {
+  0% { opacity: 0; transform: translateY(25px) scale(0.7) rotate(-5deg); }
+  75% { transform: translateY(-5px) scale(1.08) rotate(3deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+}
+
+/* Speech bubble reveal pop */
+@keyframes speech-pop {
+  0% { transform: translate(-50%, 10px) scale(0.85); opacity: 0; }
+  100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+}
+
+/* Mascot floating */
+@keyframes mascot-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+/* Mascot breathing scale */
+@keyframes mascot-breathe {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  50% { transform: scaleY(1.03) scaleX(0.98); }
+}
+
+/* Shadow shrinking under mascot */
+@keyframes shadow-scale {
+  0%, 100% { transform: scaleX(1); opacity: 0.6; }
+  50% { transform: scaleX(0.85); opacity: 0.35; }
+}
+
+/* Eyelids blink vertical squeeze */
+@keyframes mascot-blink-squeeze {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.08); }
+}
+
+/* Mascot bounce on click */
+@keyframes mascot-bounce-click {
+  0% { transform: scale(1) translateY(0); }
+  25% { transform: scale(0.88, 1.1) translateY(-18px) rotate(-5deg); }
+  50% { transform: scale(1.1, 0.9) translateY(0px) rotate(5deg); }
+  75% { transform: scale(0.95, 1.05) translateY(-5px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* Heart icon pulsing loop */
+@keyframes heart-pulsing {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.08); }
+  45% { transform: scale(1.03); }
+  65% { transform: scale(1.12); }
+}
+
+/* Background pulse for primary heart button */
+@keyframes heart-glow-pulse {
+  0%, 100% { filter: blur(20px); opacity: 0.35; transform: scale(1); }
+  50% { filter: blur(30px); opacity: 0.6; transform: scale(1.2); }
+}
+
+/* Small generic float movement */
+@keyframes float-small {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Small float with alternate rotation */
+@keyframes float-small-rotate {
+  0% { transform: translateY(0) rotate(-6deg); }
+  100% { transform: translateY(-8px) rotate(6deg); }
+}
+
+/* Wobble shake animation for gift box */
+@keyframes gift-shake {
+  0%, 90%, 100% { transform: rotate(0); }
+  92% { transform: rotate(-10deg) scale(1.08); }
+  94% { transform: rotate(8deg) scale(1.08); }
+  96% { transform: rotate(-8deg) scale(1.08); }
+  98% { transform: rotate(6deg) scale(1.08); }
+}
+
+/* Cute squeeze inward of page border vignette */
+@keyframes page-squeeze-inward {
+  0% { box-shadow: inset 0 0 0px var(--primary-color); }
+  40% { box-shadow: inset 0 0 45px var(--primary-color); }
+  100% { box-shadow: inset 0 0 0px var(--primary-color); }
+}
+
+/* Finale overlay modal pop reveal */
+@keyframes modal-pop-reveal {
+  0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Mascot celebratory happy jump */
+@keyframes mascot-celebrate-jump {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  40% { transform: translateY(-28px) scaleY(1.08) scaleX(0.93); }
+  55% { transform: translateY(0) scaleY(0.9) scaleX(1.1); }
+  70% { transform: translateY(-8px) scaleY(1.03); }
+}
+
+/* Pulse quick scale */
+@keyframes pulse-quick {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.2); }
+}
+
+/* ==========================================================================
+   MEDIA QUERIES & RESPONSIVENESS
+   ========================================================================== */
+/* Portrait viewports / Small devices first */
+@media (max-width: 380px) {
+  .app-container {
+    padding: 75px 10px 70px 10px;
+  }
+  .sticky-header {
+    top: 8px;
+    padding: 8px 12px;
+  }
+  .main-content {
+    gap: 24px;
+  }
+  .quick-actions {
+    gap: 8px;
+  }
+  .btn-action {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+  .memory-card {
+    flex: 0 0 150px;
+    padding: 12px 10px;
+  }
+}
+
+/* Tablet screens (width >= 600px) */
+@media (min-width: 600px) {
+  .app-container {
+    padding-top: 100px;
+  }
+  .sticky-header {
+    top: 20px;
+    padding: 16px 24px;
+  }
+  .header-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .love-meter-card {
+    flex: 1;
+    max-width: 320px;
+  }
+  .status-badges {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .memory-slider {
+    gap: 20px;
+  }
+  .memory-card {
+    flex: 0 0 200px;
+  }
+}
+
+/* Desktop layout options (width >= 1024px) */
+@media (min-width: 1024px) {
+  .main-content {
+    max-width: 800px;
+  }
+  .sticky-header {
+    max-width: 800px;
+  }
+}

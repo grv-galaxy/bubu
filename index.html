@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="A magical, interactive digital love letter for Bubu. Built with love, animations, and sound effects.">
+  <title>I ❤️ You Bubu - My Favorite Person</title>
+
+  <!-- Google Fonts for Kawaii & Premium Aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-light">
+  <!-- Interactive Canvas background for sparks, hearts, bubbles, and petals -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Fullscreen Loading Overlay -->
+  <div id="loader-screen" class="loader-screen" aria-live="assertive">
+    <div class="loader-content">
+      <div class="loader-heart-wrapper">
+        <div class="loader-heart-main">❤️</div>
+        <div class="loader-heart-mini">💖</div>
+        <div class="loader-heart-mini">💕</div>
+        <div class="loader-heart-mini">🌸</div>
+      </div>
+      <h2 class="loader-title">Loading Love...</h2>
+      <div class="loader-bar-outer">
+        <div id="loader-progress" class="loader-bar-inner"></div>
+      </div>
+      <p id="loader-message" class="loader-message">Counting my favorite moments...</p>
+    </div>
+  </div>
+
+  <!-- Main Webpage Container -->
+  <div id="app-container" class="app-container hidden">
+    
+    <!-- Top Sticky Bar (Glassmorphic) -->
+    <header class="sticky-header">
+      <div class="header-content">
+        <!-- Love Meter -->
+        <div class="love-meter-card" aria-label="Love Meter">
+          <div class="love-meter-label">
+            <span class="emoji-pulse">💖</span> Love Level: <strong id="love-percent-text">0%</strong>
+          </div>
+          <div class="love-meter-bar-container">
+            <div id="love-bar-progress" class="love-meter-bar-fill">
+              <div class="love-meter-shimmer"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clock & Weather Badge -->
+        <div class="status-badges">
+          <div class="status-badge clock-badge" aria-label="Current Time">
+            <span class="badge-icon">⏰</span>
+            <span id="digital-clock">00:00:00 AM</span>
+          </div>
+          <div class="status-badge weather-badge" aria-label="Today's Forecast">
+            <span class="badge-icon">🌤️</span>
+            <span>Forecast: 100% Love ❤️</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Hero Header Section -->
+      <section class="hero-section">
+        <h1 class="hero-title" id="animate-title" aria-label="I Love You Bubu">
+          <span class="letter">I</span>
+          <span class="letter heart-letter">❤️</span>
+          <span class="letter">Y</span>
+          <span class="letter">o</span>
+          <span class="letter">u</span>
+          <span class="letter space"></span>
+          <span class="letter">B</span>
+          <span class="letter">u</span>
+          <span class="letter">b</span>
+          <span class="letter">u</span>
+        </h1>
+        <p class="hero-subtitle" id="typewriter-subtitle" aria-live="polite">My happiest place.</p>
+      </section>
+
+      <!-- Main Mascot Section -->
+      <section class="mascot-section">
+        <div class="mascot-wrapper">
+          <!-- Speech Bubble -->
+          <div id="speech-bubble" class="speech-bubble hidden" aria-live="polite">
+            <span id="speech-text">Click me! 🤗</span>
+            <div class="speech-arrow"></div>
+          </div>
+
+          <!-- Character Image Container -->
+          <button id="mascot-btn" class="mascot-container" aria-label="Bubu Mascot - Click for love">
+            <!-- Blush overlays and eyelids elements to dynamically render cute features on top of bubu.jpg -->
+            <div id="blush-left" class="mascot-blush left"></div>
+            <div id="blush-right" class="mascot-blush right"></div>
+            <div id="eyelid-overlay" class="eyelid-overlay"></div>
+            <img src="bubu.jpg" alt="Cute Bubu Mascot" class="mascot-img">
+            <div class="mascot-shadow"></div>
+          </button>
+        </div>
+
+        <!-- Quick Interaction Buttons underneath mascot -->
+        <div class="quick-actions">
+          <button id="hug-btn" class="btn-action" aria-label="Give Bubu a Hug">
+            <span class="btn-icon">🤗</span> Give Hug
+          </button>
+          <button id="kiss-btn" class="btn-action" aria-label="Send Bubu a Kiss">
+            <span class="btn-icon">😘</span> Send Kiss
+          </button>
+        </div>
+      </section>
+
+      <!-- Giant Interactive Love Button -->
+      <section class="love-trigger-section">
+        <button id="love-heart-btn" class="love-heart-btn" aria-label="Send Love - Double love level">
+          <svg viewBox="0 0 32 29.6" class="svg-heart">
+            <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+          </svg>
+          <span class="heart-pulse-glow"></span>
+        </button>
+        <span class="tap-hint">Tap the Heart to fill with Love!</span>
+      </section>
+
+      <!-- Scrollable Memory Cards -->
+      <section class="memory-section">
+        <h2 class="section-title">✨ Our Sweet Memories</h2>
+        <div class="memory-slider" tabindex="0" aria-label="Memory Carousel">
+          <div class="memory-card">
+            <div class="memory-emoji">🌸</div>
+            <h3 class="memory-card-title">First Smile</h3>
+            <p class="memory-text">The moment I saw you smile, my heart knew you were the one. 🥰</p>
+          </div>
+          <div class="memory-card">
+            <div class="memory-emoji">💕</div>
+            <h3 class="memory-card-title">Our Story</h3>
+            <p class="memory-text">Every single page we write together is my favorite story. 📖</p>
+          </div>
+          <div class="memory-card">
+            <div class="memory-emoji">✨</div>
+            <h3 class="memory-card-title">Favorite Memory</h3>
+            <p class="memory-text">Every laugh we share and every warm hug is locked in my heart. 🗝️</p>
+          </div>
+          <div class="memory-card">
+            <div class="memory-emoji">🌙</div>
+            <h3 class="memory-card-title">Dream Together</h3>
+            <p class="memory-text">Walking hand in hand through all the beautiful dreams of tomorrow. 🌌</p>
+          </div>
+          <div class="memory-card">
+            <div class="memory-emoji">❤️</div>
+            <h3 class="memory-card-title">Forever Us</h3>
+            <p class="memory-text">Through thick and thin, giggles and tears, I am yours completely. 💑</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Compliment Generator Section -->
+      <section class="compliment-section">
+        <button id="compliment-btn" class="btn-compliment" aria-label="Get a cute compliment">
+          ✨ Need a Compliment? ✨
+        </button>
+      </section>
+
+      <!-- Floating Quote Card -->
+      <section class="quotes-section">
+        <div class="quote-card-wrapper">
+          <p class="quote-text" id="quote-display">"You make my world spin in the best possible way."</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Floating Audio Control (Bottom Left) -->
+    <div class="music-widget">
+      <button id="music-btn" class="btn-floating music" aria-label="Toggle Romantic Music">
+        <svg viewBox="0 0 24 24" class="svg-music-icon play">
+          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3H12zm2 14c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Floating Themes & Controls Widget (Top Right / Sticky floating) -->
+    <div class="theme-widget">
+      <button id="theme-btn" class="btn-floating theme" aria-label="Switch Theme">
+        🎨
+      </button>
+      <div id="theme-selector-panel" class="theme-panel hidden">
+        <button class="theme-opt opt-light" data-theme="light" aria-label="Light Cream Theme">Cream</button>
+        <button class="theme-opt opt-pink" data-theme="pink" aria-label="Sweet Pink Theme">Pink</button>
+        <button class="theme-opt opt-night" data-theme="night" aria-label="Midnight Dream Theme">Night</button>
+        <button class="theme-opt opt-dream" data-theme="dream" aria-label="Cosmic Pastel Theme">Dream</button>
+      </div>
+    </div>
+
+    <!-- Floating Gift Box (Bottom Right) -->
+    <div class="gift-widget">
+      <button id="gift-btn" class="gift-box-btn" aria-label="Open secret gift box">
+        <div class="gift-lid"></div>
+        <div class="gift-box-body"></div>
+        <span class="gift-glow"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Reusable Glassmorphism Modal System -->
+  <div id="love-modal" class="modal-overlay hidden" aria-modal="true" role="dialog">
+    <div class="modal-card">
+      <button id="modal-close" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      <div id="modal-content" class="modal-body">
+        <!-- Content dynamically injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Finale Fullscreen Transformation Overlay (Triggered at 100%) -->
+  <div id="finale-overlay" class="finale-overlay hidden" aria-live="assertive">
+    <div class="finale-content">
+      <div class="finale-hearts-shower"></div>
+      <div class="finale-character-frame">
+        <img src="bubu.jpg" alt="Happy Bubu Mascot" class="finale-mascot-img">
+      </div>
+      <h1 class="finale-title">I Love You Forever, Bubu ❤️</h1>
+      <p class="finale-subtitle">You are my whole universe, my happiest place, and my forever favorite.</p>
+      
+      <!-- Replay Button -->
+      <button id="replay-btn" class="replay-btn" aria-label="Replay experience from beginning">
+        🔄 Replay Our Story
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
