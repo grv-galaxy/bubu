@@ -687,6 +687,9 @@ window.addEventListener('DOMContentLoaded', () => {
         
         // Auto-blink setup
         scheduleMascotBlinks();
+
+        // Dynamic Favicon heartbeat
+        initFaviconAnimation();
       }, 500);
     } else {
       loaderProgress.style.width = `${currentProgress}%`;
@@ -1243,3 +1246,59 @@ window.addEventListener('keydown', (e) => {
     konamiState = 0; // Reset state
   }
 });
+
+/* ==========================================================================
+   10. ANIMATED FAVICON SYSTEM
+   ========================================================================== */
+function initFaviconAnimation() {
+  const faviconLink = document.getElementById('favicon');
+  if (!faviconLink) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 32;
+  canvas.height = 32;
+  const fctx = canvas.getContext('2d');
+
+  let angle = 0;
+
+  setInterval(() => {
+    fctx.clearRect(0, 0, 32, 32);
+
+    // Dynamic scale oscillation for heartbeat animation
+    angle += 0.15;
+    const scale = 0.82 + Math.sin(angle) * 0.15;
+
+    fctx.save();
+    fctx.translate(16, 16);
+    fctx.scale(scale, scale);
+
+    // Heart Bezier Curve Math
+    fctx.beginPath();
+    fctx.moveTo(0, -5);
+    fctx.bezierCurveTo(-6, -11, -14, -5, -14, 5);
+    fctx.bezierCurveTo(-14, 13, -6, 19, 0, 27);
+    fctx.bezierCurveTo(6, 19, 14, 13, 14, 5);
+    fctx.bezierCurveTo(14, -5, 6, -11, 0, -5);
+    fctx.closePath();
+
+    // Color adapts to current active theme
+    let heartColor = '#ff758f'; // Light/Pink Theme default pink
+    if (activeTheme === 'night') {
+      heartColor = '#f72585'; // Neon pink
+    } else if (activeTheme === 'dream') {
+      heartColor = '#9b5de5'; // Cosmic Lavender
+    }
+    
+    fctx.fillStyle = heartColor;
+    
+    // Add glowing shadow in browsers that support canvas shadow filters
+    fctx.shadowColor = 'rgba(255, 77, 109, 0.45)';
+    fctx.shadowBlur = 4;
+    
+    fctx.fill();
+    fctx.restore();
+
+    faviconLink.href = canvas.toDataURL('image/png');
+  }, 120); // Smooth 120ms ticks
+}
+
